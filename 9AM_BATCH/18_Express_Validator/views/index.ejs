@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">-->
+  <link rel="stylesheet" href="../public/bootstrap/css/font-awesome-5.8.1.css">
+  <link rel="stylesheet" href="../public/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" href="../public/bootstrap/css/mdb.css">
+  <link rel="stylesheet" href="../public/bootstrap/css/style.css">
+    <title>Express Validator</title>
+  <style>
+    .submit-btn{
+      width: 300px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Main Navbar -->
+  <nav class="navbar navbar-expand-md navbar-dark bg-teal">
+    <a class="navbar-brand" href="/">Express Validator</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Register Form -->
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-md-6 m-auto">
+        <%if(resultArray.length === 0){ %>
+          <div class="alert alert-success animated zoomIn">
+            <strong>Registration is Success</strong>
+            <button class="close" data-dismiss="alert">
+              <i class="fa fa-times-circle"></i>
+            </button>
+          </div>
+        <%}%>
+        <div class="card">
+          <div class="card-header bg-teal text-white text-center">
+            <h3>Register Here</h3>
+          </div>
+          <div class="card-body bg-light">
+            <form action="/register" method="post" novalidate>
+              <div class="form-group">
+                <input
+                        type="email"
+                        placeholder="Email"
+                        class="form-control <%= resultArray.find(object => object.param === 'email')? 'is-invalid' : '' %>"
+                        name="email"
+                        value="<%= user.email %>">
+                <% if(resultArray.find(object => object.param === 'email')){ %>
+                    <div class="invalid-feedback">
+                        Please provide a valid Email
+                    </div>
+                <%}%>
+              </div>
+              <div class="form-group">
+                <input
+                        type="password"
+                        placeholder="Password"
+                        class="form-control <%= resultArray.find(object => object.param === 'password')? 'is-invalid' : '' %>"
+                        name="password"
+                        value="<%= user.password %>">
+                <% if(resultArray.find(object => object.param === 'password')){ %>
+                  <div class="invalid-feedback">
+                    Please Enter min 5 letters
+                  </div>
+                <%}%>
+              </div>
+              <div class="form-group">
+                <input
+                        type="password"
+                        placeholder="Confirm Password"
+                        class="form-control <%= resultArray.find(object => object.param === 'c_password')? 'is-invalid' : '' %>"
+                        name="c_password"
+                        value="<%= user.c_password %>">
+                <% if(resultArray.find(object => object.param === 'c_password')){ %>
+                  <div class="invalid-feedback">
+                    Both the passwords are not matched
+                  </div>
+                <%}%>
+              </div>
+              <div class="text-center">
+                <input type="submit" class="btn btn-teal submit-btn" value="Register">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<script src="../public/bootstrap/js/jquery-3.3.1.min.js"></script>
+<script src="../public/bootstrap/js/popper.min.js"></script>
+<script src="../public/bootstrap/js/bootstrap.js"></script>
+<script src="../public/bootstrap/js/mdb.js"></script>
+</body>
+</html>
